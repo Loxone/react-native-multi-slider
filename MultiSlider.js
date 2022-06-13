@@ -460,15 +460,19 @@ export default class MultiSlider extends React.Component {
       this.props.stepMarkerStyle,
     ];
 
+    const trackMargin = this.props.trackStyle.height/2 - this.props.stepMarkerStyle.height/2;
+    const selectedMargin = this.props.selectedStyle.height/2 - this.props.stepMarkerStyle.height/2;
+
     return this.optionsArray.map((number, index) => {
       var step = this.stepsAs[index];
+      var isInSelectedRange = step <= this.state.valueTwo && step >= this.state.valueOne;
       return (
         <View
           key={number}
           style={[
             styles.step,
             this.props.stepStyle,
-            { left: stepLength * index },
+            { left: stepLength * index, marginTop: isInSelectedRange ? selectedMargin : trackMargin },
           ]}
         >
           {this.props.showStepMarkers &&
