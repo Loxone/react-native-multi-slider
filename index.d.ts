@@ -94,6 +94,12 @@ export interface MultiSliderProps {
     imageBackgroundSource?: string;
     enableLabel?: boolean;
     vertical?: boolean;
+
+    // added by Loxone
+    gradientColors: string[],
+    labelStyle: ViewStyle
+    labelTextStyle: ViewStyle,
+    labelOpacity: number
 }
 
 export default class MultiSlider extends React.Component<MultiSliderProps> {}

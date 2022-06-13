@@ -494,6 +494,9 @@ export default class MultiSlider extends React.Component {
       sliderLength,
       markerOffsetX,
       markerOffsetY,
+      gradientColors,
+      labelTextStyle,
+      labelOpacity
     } = this.props;
     const twoMarkers = this.props.values.length == 2; // when allowOverlap, positionTwo could be 0, identified as string '0' and throwing 'RawText 0 needs to be wrapped in <Text>' error
 
@@ -545,17 +548,39 @@ export default class MultiSlider extends React.Component {
       });
     }
 
+    const renderTrack = () => {
+      if (gradientColors && !this.props.disabled) {
+        return (
+            <LinearGradient
+                colors={gradientColors}
+                style={[
+                  styles.track,
+                  this.props.trackStyle,
+                  trackOneStyle,
+                  { width: trackOneLength , backgroundColor: "transparent"},
+                ]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+            />
+        );
+      } else {
+        return (
+            <View
+                style={[
+                  styles.track,
+                  this.props.trackStyle,
+                  trackOneStyle,
+                  { width: trackOneLength },
+                ]}
+            />
+        );
+      }
+    }
+
     const body = (
       <React.Fragment>
         <View style={[styles.fullTrack, { width: sliderLength }]}>
-          <View
-            style={[
-              styles.track,
-              this.props.trackStyle,
-              trackOneStyle,
-              { width: trackOneLength },
-            ]}
-          />
+          {renderTrack()}
           <View
             style={[
               styles.track,
@@ -669,15 +694,17 @@ export default class MultiSlider extends React.Component {
             twoMarkerLeftPosition={positionTwo}
             oneMarkerPressed={this.state.onePressed}
             twoMarkerPressed={this.state.twoPressed}
+            labelTextStyle={labelTextStyle}
+            labelOpacity={labelOpacity}
           />
         )}
         {this.props.imageBackgroundSource && (
-          <ImageBackground
-            source={this.props.imageBackgroundSource}
-            style={[{ width: '100%', height: '100%' }, containerStyle]}
-          >
-            {body}
-          </ImageBackground>
+            <ImageBackground
+                source={this.props.imageBackgroundSource}
+                style={[{ width: '100%', height: this.props.trackStyle.height, flex: 1 }, containerStyle]}
+                imageStyle={{height: this.props.trackStyle.height, borderRadius: this.props.trackStyle.borderRadius}}>
+              {body}
+            </ImageBackground>
         )}
         {!this.props.imageBackgroundSource && (
           <View style={containerStyle}>{body}</View>
