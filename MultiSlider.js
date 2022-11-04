@@ -121,7 +121,7 @@ export default class MultiSlider extends React.Component {
   }
 
   handleTap(evt, gestureState) {
-    if (gestureState && this._markerOne) {
+    if (!this.disableTapHandler && gestureState && this._markerOne) {
       let currMarkerPosition = this._markerOne.getBoundingClientRect();
       let dx = gestureState.x0 - currMarkerPosition.x - currMarkerPosition.width/2;
       this.moveOneByXY(dx, 0);
@@ -188,6 +188,7 @@ export default class MultiSlider extends React.Component {
   };
 
   startOne = () => {
+    this.disableTapHandler = true;
     if (this.props.enabledOne) {
       this.props.onValuesChangeStart();
       this.setState({
@@ -197,6 +198,7 @@ export default class MultiSlider extends React.Component {
   };
 
   startTwo = () => {
+    this.disableTapHandler = true;
     if (this.props.enabledTwo) {
       this.props.onValuesChangeStart();
       this.setState({
@@ -352,6 +354,9 @@ export default class MultiSlider extends React.Component {
   };
 
   endOne = gestureState => {
+    setTimeout(() => {
+      this.disableTapHandler = false;
+    }, 100)
     if (gestureState.moveX === 0 && this.props.onToggleOne) {
       this.props.onToggleOne();
       return;
@@ -380,6 +385,9 @@ export default class MultiSlider extends React.Component {
   };
 
   endTwo = gestureState => {
+    setTimeout(() => {
+      this.disableTapHandler = false;
+    }, 100)
     if (gestureState.moveX === 0 && this.props.onToggleTwo) {
       this.props.onToggleTwo();
       return;
