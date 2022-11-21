@@ -121,7 +121,7 @@ export default class MultiSlider extends React.Component {
   }
 
   handleTap(evt, gestureState) {
-    if (!this.disableTapHandler && gestureState && this._markerOne) {
+    if (!this.props.disabled && !this.disableTapHandler && gestureState && this._markerOne) {
       let currMarkerPosition = this._markerOne.getBoundingClientRect();
       let dx = gestureState.x0 - currMarkerPosition.x - currMarkerPosition.width/2;
       this.moveOneByXY(dx, 0);
