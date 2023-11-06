@@ -130,6 +130,7 @@ export default class MultiSlider extends React.Component {
       this._markerOne.measureInWindow((x, y, width) => {
         let dx = gestureState.x0 - x - width / 2;
         this.moveOneByXY(dx, 0);
+        this.props.onValuesChangeFinish([this.state.valueOne]);
       });
     }
   }
