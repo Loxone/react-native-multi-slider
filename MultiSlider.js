@@ -147,7 +147,7 @@ export default class MultiSlider extends React.Component {
     this._tapPanResponderRight = PanResponder.create({
       onStartShouldSetPanResponder: (evt, gestureState) => true,
       onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
-      onPanResponderGrant: (evt, gestureState) => this.handleTap(evt, gestureState),
+      //onPanResponderGrant: (evt, gestureState) => this.handleTap(evt, gestureState),
       onPanResponderRelease: (evt, gestureState) => this.handleTap(evt, gestureState),
       onShouldBlockNativeResponder: (evt, gestureState) => true,
     })
@@ -155,7 +155,7 @@ export default class MultiSlider extends React.Component {
     this._tapPanResponderLeft = PanResponder.create({
       onStartShouldSetPanResponder: (evt, gestureState) => true,
       onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
-      onPanResponderGrant: (evt, gestureState) => this.handleTap(evt, gestureState),
+      //onPanResponderGrant: (evt, gestureState) => this.handleTap(evt, gestureState),
       onPanResponderRelease: (evt, gestureState) => this.handleTap(evt, gestureState),
       onShouldBlockNativeResponder: (evt, gestureState) => true,
     })
