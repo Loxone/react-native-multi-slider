@@ -354,13 +354,9 @@ export default class MultiSlider extends React.Component {
   };
 
   endOne = gestureState => {
-    if (!this.props.enabledOne) {
-      return;
-    }
     setTimeout(() => {
       this.disableTapHandler = false;
     }, 100)
-
     if (gestureState.moveX === 0 && this.props.onToggleOne) {
       this.props.onToggleOne();
       return;
@@ -389,9 +385,6 @@ export default class MultiSlider extends React.Component {
   };
 
   endTwo = gestureState => {
-    if (!this.props.enabledTwo) {
-      return;
-    }
     setTimeout(() => {
       this.disableTapHandler = false;
     }, 100)
